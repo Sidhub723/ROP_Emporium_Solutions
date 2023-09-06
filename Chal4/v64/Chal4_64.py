@@ -35,6 +35,6 @@ pay = flat(
 print(payload)
 p = process()
 p.clean()
-p.sendline(payload) # or pay 
+p.sendline(payload) # or pay    
 p.interactive()
 
