@@ -1,5 +1,4 @@
 from pwn import *
-import pwn
 
 #trying to "pivot"(i.r move around esp) so that a longer stack chain can
 #this solution is somewhat confusing and non intuitive
